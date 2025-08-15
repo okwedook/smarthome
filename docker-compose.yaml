@@ -8,12 +8,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
     environment:
       - TZ=Europe/Moscow
-    network_mode: host  # Required for Matter discovery
-    # Alternative if you prefer bridge networking:
-    # networks:
-    #   - ha_network
-    # ports:
-    #   - "8123:8123"  # HA Web UI
+    network_mode: host
     depends_on:
       - matter-server
 
@@ -21,17 +16,8 @@ services:
     image: ghcr.io/home-assistant-libs/python-matter-server:stable
     container_name: matter-server
     restart: unless-stopped
-    network_mode: host  # Required for Matter over Wi-Fi/Thread
-    # Alternative for bridge networking (less reliable for Matter):
-    # networks:
-    #   - ha_network
+    network_mode: host
     volumes:
       - ./matter:/data
     environment:
       - TZ=Europe/Moscow
-
-# Uncomment if using bridge networking:
-# networks:
-#   ha_network:
-#     driver: bridge
-
