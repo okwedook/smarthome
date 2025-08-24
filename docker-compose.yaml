@@ -11,6 +11,9 @@ services:
     network_mode: host
     depends_on:
       - matter-server
+    devices:
+      - "/dev/ttyUSB0:/dev/ttyUSB0"
+    privileged: true
 
   matter-server:
     image: ghcr.io/home-assistant-libs/python-matter-server:stable
